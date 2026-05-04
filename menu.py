@@ -56,7 +56,7 @@ class Menu:
                         self.levels.append({
                             "file": filepath,
                             "name": filename,
-                            "author": "未知",
+                            "author": _("author", "未知"),
                             "description": "",
                             "filename": filename
                         })
