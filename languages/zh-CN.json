@@ -10,6 +10,7 @@
         "editor": "地图编辑器",
         "import_map": "导入地图游玩",
         "settings": "设置",
+        "changelog": "更新日志",
         "quit": "退出游戏",
         "version": "版本"
     },
@@ -24,6 +25,11 @@
     "settings": {
         "title": "设置",
         "language": "语言",
+        "back": "返回"
+    },
+
+    "changelog": {
+        "title": "更新日志",
         "back": "返回"
     },
 

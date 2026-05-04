@@ -19,20 +19,31 @@ class Menu:
         self.state = "main"
         self.level_buttons = []
         self.settings_buttons = []
+        self.changelog_data = []
+        self.changelog_scroll = 0
         self._init_main_buttons()
         self._scan_levels()
-        self.version = "v1.0.0"
+        self.version = "v1.0.1"
         self.dev_info_btn = pygame.Rect(screen.get_width() - 42, screen.get_height() - 42, 32, 32)
         self.dev_info_img = None
         self.show_dev_popup = False
         self._load_dev_info_img()
         self._init_settings_buttons()
+        self._load_changelog()
 
     def _load_dev_info_img(self):
         try:
             self.dev_info_img = pygame.image.load("assets/img/dev_info.png")
         except Exception:
             self.dev_info_img = None
+
+    def _load_changelog(self):
+        try:
+            with open("data/changelog.json", "r", encoding="utf-8") as f:
+                data = json.load(f)
+            self.changelog_data = data.get("changelog", [])
+        except Exception:
+            self.changelog_data = []
 
     def _scan_levels(self):
         self.levels = []
@@ -64,15 +75,16 @@ class Menu:
     def _init_main_buttons(self):
         sw, sh = self.screen.get_size()
         center_x = sw // 2
-        start_y = sh // 2 - 80
-        gap = 70
+        start_y = sh // 2 - 100
+        gap = 60
 
         self.buttons = [
-            {"rect": pygame.Rect(center_x - 120, start_y, 240, 50), "action": "level_select", "text": _("menu.start_game")},
-            {"rect": pygame.Rect(center_x - 120, start_y + gap, 240, 50), "action": "editor", "text": _("menu.editor")},
-            {"rect": pygame.Rect(center_x - 120, start_y + gap * 2, 240, 50), "action": "import_play", "text": _("menu.import_map")},
-            {"rect": pygame.Rect(center_x - 120, start_y + gap * 3, 240, 50), "action": "settings", "text": _("menu.settings")},
-            {"rect": pygame.Rect(center_x - 120, start_y + gap * 4, 240, 50), "action": "quit", "text": _("menu.quit")},
+            {"rect": pygame.Rect(center_x - 120, start_y, 240, 45), "action": "level_select", "text": _("menu.start_game")},
+            {"rect": pygame.Rect(center_x - 120, start_y + gap, 240, 45), "action": "editor", "text": _("menu.editor")},
+            {"rect": pygame.Rect(center_x - 120, start_y + gap * 2, 240, 45), "action": "import_play", "text": _("menu.import_map")},
+            {"rect": pygame.Rect(center_x - 120, start_y + gap * 3, 240, 45), "action": "settings", "text": _("menu.settings")},
+            {"rect": pygame.Rect(center_x - 120, start_y + gap * 4, 240, 45), "action": "changelog", "text": _("menu.changelog")},
+            {"rect": pygame.Rect(center_x - 120, start_y + gap * 5, 240, 45), "action": "quit", "text": _("menu.quit")},
         ]
 
     def _init_level_buttons(self):
@@ -153,6 +165,10 @@ class Menu:
                             self.state = "settings"
                             self._init_settings_buttons()
                             return None
+                        elif action == "changelog":
+                            self.state = "changelog"
+                            self.changelog_scroll = 0
+                            return None
                         elif action == "quit":
                             return {"action": "quit"}
 
@@ -183,9 +199,21 @@ class Menu:
                                 print(f"{_('level_select.load_failed')}: {e}")
                                 return None
 
+            elif self.state == "changelog":
+                back_btn = pygame.Rect(self.screen.get_width() // 2 - 100, self.screen.get_height() - 60, 200, 45)
+                if back_btn.collidepoint(mx, my):
+                    self.state = "main"
+                    self._init_main_buttons()
+                    return None
+
+        if event.type == pygame.MOUSEWHEEL:
+            if self.state == "changelog":
+                self.changelog_scroll -= event.y * 30
+                self.changelog_scroll = max(0, self.changelog_scroll)
+
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
-                if self.state == "level_select" or self.state == "settings":
+                if self.state in ("level_select", "settings", "changelog"):
                     self.state = "main"
                     self._init_main_buttons()
                 else:
@@ -218,16 +246,18 @@ class Menu:
             self._draw_level_select()
         elif self.state == "settings":
             self._draw_settings()
+        elif self.state == "changelog":
+            self._draw_changelog()
 
     def _draw_main(self):
         self.screen.fill((25, 25, 40))
 
         title = self.font.render(_("menu.title"), True, (255, 255, 255))
-        title_rect = title.get_rect(center=(self.screen.get_width() // 2, 120))
+        title_rect = title.get_rect(center=(self.screen.get_width() // 2, 100))
         self.screen.blit(title, title_rect)
 
         subtitle = self.small_font.render(_("menu.subtitle"), True, (180, 180, 180))
-        subtitle_rect = subtitle.get_rect(center=(self.screen.get_width() // 2, 170))
+        subtitle_rect = subtitle.get_rect(center=(self.screen.get_width() // 2, 150))
         self.screen.blit(subtitle, subtitle_rect)
 
         mx, my = pygame.mouse.get_pos()
@@ -241,17 +271,14 @@ class Menu:
             text_rect = text.get_rect(center=btn["rect"].center)
             self.screen.blit(text, text_rect)
 
-        # Draw version info
         version_text = self.small_font.render(f"{_('menu.version')} {self.version}", True, (150, 150, 150))
         self.screen.blit(version_text, (10, self.screen.get_height() - 20))
 
-        # Draw developer info button
         if self.dev_info_img:
             self.screen.blit(self.dev_info_img, self.dev_info_btn)
         else:
             pygame.draw.rect(self.screen, (100, 149, 237), self.dev_info_btn, border_radius=4)
 
-        # Draw developer popup if active
         if self.show_dev_popup:
             popup_rect = pygame.Rect(20, self.screen.get_height() - 150, 280, 130)
             pygame.draw.rect(self.screen, (40, 40, 60), popup_rect, border_radius=8)
@@ -341,3 +368,45 @@ class Menu:
                     check_mark = self.small_font.render("✓", True, (100, 249, 237))
                     check_rect = check_mark.get_rect(right=btn["rect"].right - 15, centery=btn["rect"].centery)
                     self.screen.blit(check_mark, check_rect)
+
+    def _draw_changelog(self):
+        self.screen.fill((25, 25, 40))
+
+        title = self.title_font.render(_("changelog.title"), True, (255, 255, 255))
+        title_rect = title.get_rect(center=(self.screen.get_width() // 2, 50))
+        self.screen.blit(title, title_rect)
+
+        content_rect = pygame.Rect(50, 90, self.screen.get_width() - 100, self.screen.get_height() - 170)
+
+        pygame.draw.rect(self.screen, (35, 35, 50), content_rect, border_radius=8)
+        pygame.draw.rect(self.screen, (80, 80, 100), content_rect, 2, border_radius=8)
+
+        y_offset = 110 - self.changelog_scroll
+
+        for entry in self.changelog_data:
+            if y_offset > content_rect.bottom:
+                break
+            if y_offset > content_rect.top - 50:
+                version_text = self.button_font.render(f"{entry['version']} ({entry['date']})", True, (100, 149, 237))
+                self.screen.blit(version_text, (70, y_offset))
+                y_offset += 35
+
+                for change in entry.get("changes", []):
+                    if y_offset > content_rect.bottom:
+                        break
+                    if y_offset > content_rect.top - 20:
+                        change_text = self.small_font.render(f"• {change}", True, (200, 200, 200))
+                        self.screen.blit(change_text, (90, y_offset))
+                    y_offset += 25
+
+                y_offset += 15
+
+        mx, my = pygame.mouse.get_pos()
+        back_btn = pygame.Rect(self.screen.get_width() // 2 - 100, self.screen.get_height() - 60, 200, 45)
+        hover = back_btn.collidepoint(mx, my)
+        color = (180, 80, 80) if hover else (120, 50, 50)
+        pygame.draw.rect(self.screen, color, back_btn, border_radius=6)
+        pygame.draw.rect(self.screen, (200, 100, 100), back_btn, 2, border_radius=6)
+        text = self.button_font.render(_("changelog.back"), True, (255, 255, 255))
+        text_rect = text.get_rect(center=back_btn.center)
+        self.screen.blit(text, text_rect)

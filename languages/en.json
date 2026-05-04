@@ -10,6 +10,7 @@
         "editor": "Map Editor",
         "import_map": "Import Map",
         "settings": "Settings",
+        "changelog": "Changelog",
         "quit": "Quit",
         "version": "Version"
     },
@@ -24,6 +25,11 @@
     "settings": {
         "title": "Settings",
         "language": "Language",
+        "back": "Back"
+    },
+
+    "changelog": {
+        "title": "Changelog",
         "back": "Back"
     },
 
