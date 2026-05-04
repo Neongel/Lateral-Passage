@@ -1,0 +1,14 @@
+{
+  "id": "spike",
+  "name": "尖刺",
+  "description": "触碰会死亡的陷阱",
+  "category": "trap",
+  "texture": "data/items/spike.png",
+  "solid": false,
+  "has_lua": true,
+  "lua_script": "spike.lua",
+  "properties": {
+    "damage": 999,
+    "kill": true
+  }
+}

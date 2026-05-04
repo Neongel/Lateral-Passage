@@ -1,0 +1,86 @@
+{
+    "language": "简体中文",
+    "game_name": "横向通道",
+    "game_name_short": "横向通道",
+
+    "menu": {
+        "title": "横向通道",
+        "subtitle": "方向键/WASD移动 | 空格/上/W跳跃 | ESC返回",
+        "start_game": "开始游戏",
+        "editor": "地图编辑器",
+        "import_map": "导入地图游玩",
+        "settings": "设置",
+        "quit": "退出游戏",
+        "version": "版本"
+    },
+
+    "level_select": {
+        "title": "选择关卡",
+        "back": "返回",
+        "author": "作者",
+        "load_failed": "加载关卡失败"
+    },
+
+    "settings": {
+        "title": "设置",
+        "language": "语言",
+        "back": "返回"
+    },
+
+    "dev_info": {
+        "title": "开发者信息",
+        "developers": "开发者",
+        "ui_design": "UI绘制",
+        "click_to_close": "点击任意处关闭"
+    },
+
+    "editor": {
+        "map_props": "地图属性",
+        "item_select": "物品块",
+        "export": "导出",
+        "import": "导入",
+        "test": "测试游玩",
+        "left_click": "左键放置",
+        "right_click": "右键移除",
+        "middle_click": "中键拖动",
+        "scroll_zoom": "滚轮缩放",
+        "esc_return": "ESC返回",
+        "tip_place": "左键放置 | 右键移除 | 中键拖动 | 滚轮缩放({zoom}%) | ESC返回"
+    },
+
+    "map_props": {
+        "title": "地图属性",
+        "map_info": "地图信息",
+        "name": "名称",
+        "author": "作者",
+        "description": "描述",
+        "map_settings": "地图属性",
+        "width": "宽度",
+        "height": "高度",
+        "bg_color": "背景色",
+        "save": "保存"
+    },
+
+    "item_select": {
+        "title": "选择物品"
+    },
+
+    "import": {
+        "failed": "导入失败"
+    },
+
+    "game": {
+        "win_title": "恭喜通关！",
+        "win_subtitle": "按 ESC 返回",
+        "death_title": "你死了！",
+        "death_subtitle": "正在重置..."
+    },
+
+    "items": {
+        "ground": "地面",
+        "spike": "尖刺",
+        "start": "起点",
+        "end": "终点",
+        "door": "门"
+    }
+}

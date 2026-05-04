@@ -1,0 +1,11 @@
+{
+  "id": "end",
+  "name": "终点",
+  "description": "到达此处即可通关",
+  "category": "special",
+  "texture": "data/items/end.png",
+  "solid": false,
+  "has_lua": true,
+  "lua_script": "end.lua",
+  "properties": {}
+}

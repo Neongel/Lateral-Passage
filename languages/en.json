@@ -1,0 +1,86 @@
+{
+    "language": "English",
+    "game_name": "Side Runner",
+    "game_name_short": "Side Runner",
+
+    "menu": {
+        "title": "Side Runner",
+        "subtitle": "Arrow Keys/WASD Move | Space/Up/W Jump | ESC Return",
+        "start_game": "Start Game",
+        "editor": "Map Editor",
+        "import_map": "Import Map",
+        "settings": "Settings",
+        "quit": "Quit",
+        "version": "Version"
+    },
+
+    "level_select": {
+        "title": "Select Level",
+        "back": "Back",
+        "author": "Author",
+        "load_failed": "Failed to load level"
+    },
+
+    "settings": {
+        "title": "Settings",
+        "language": "Language",
+        "back": "Back"
+    },
+
+    "dev_info": {
+        "title": "Developer Info",
+        "developers": "Developers",
+        "ui_design": "UI Design",
+        "click_to_close": "Click anywhere to close"
+    },
+
+    "editor": {
+        "map_props": "Map Props",
+        "item_select": "Items",
+        "export": "Export",
+        "import": "Import",
+        "test": "Test Play",
+        "left_click": "Left Click",
+        "right_click": "Right Click",
+        "middle_click": "Middle Click",
+        "scroll_zoom": "Scroll Zoom",
+        "esc_return": "ESC Return",
+        "tip_place": "LMB Place | RMB Remove | MMB Pan | Scroll Zoom({zoom}%) | ESC"
+    },
+
+    "map_props": {
+        "title": "Map Properties",
+        "map_info": "Map Info",
+        "name": "Name",
+        "author": "Author",
+        "description": "Description",
+        "map_settings": "Map Settings",
+        "width": "Width",
+        "height": "Height",
+        "bg_color": "BG Color",
+        "save": "Save"
+    },
+
+    "item_select": {
+        "title": "Select Item"
+    },
+
+    "import": {
+        "failed": "Import failed"
+    },
+
+    "game": {
+        "win_title": "Congratulations!",
+        "win_subtitle": "Press ESC to return",
+        "death_title": "You died!",
+        "death_subtitle": "Resetting..."
+    },
+
+    "items": {
+        "ground": "Ground",
+        "spike": "Spike",
+        "start": "Start",
+        "end": "End",
+        "door": "Door"
+    }
+}

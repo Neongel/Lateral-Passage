@@ -1,0 +1,12 @@
+{
+  "id": "ground",
+  "name": "地面",
+  "description": "玩家可以站立的地面方块",
+  "category": "block",
+  "texture": "data/items/ground.png",
+  "solid": true,
+  "has_lua": false,
+  "properties": {
+    "friction": 1.0
+  }
+}

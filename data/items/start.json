@@ -1,0 +1,10 @@
+{
+  "id": "start",
+  "name": "起点",
+  "description": "玩家出生的位置",
+  "category": "special",
+  "texture": "data/items/start.png",
+  "solid": false,
+  "has_lua": false,
+  "properties": {}
+}

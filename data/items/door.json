@@ -1,0 +1,13 @@
+{
+  "id": "door",
+  "name": "门",
+  "description": "可开关的门，关闭时阻挡玩家，打开时可通过",
+  "category": "interactive",
+  "texture": "data/items/door.png",
+  "solid": true,
+  "has_lua": true,
+  "lua_script": "door.lua",
+  "properties": {
+    "open": false
+  }
+}
