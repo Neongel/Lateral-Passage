@@ -1,1 +1,67 @@
-{"changelog": [{"version": "v1.0.0", "date": "2026-04-30", "changes": ["Initial release", "Implemented player movement and jumping", "Added map editor functionality", "Support for level import/export", "Added start, end, trap and other items", "Implemented level selection interface"]}, {"version": "v1.0.1", "date": "2026-05-04", "changes": ["Added multi-language support (Simplified Chinese/English)", "Added settings interface with language switching", "Added developer info button", "Added door item with click toggle", "Fixed door state initialization issue", "Fixed editor item overlap placement issue"]}, {"version": "v1.0.2", "date": "2026-05-04", "changes": ["Added changelog feature"]}, {"version": "v1.0.3", "date": "2026-05-04", "changes": ["Fixed text overflow clipping in changelog", "Added scroll range limits", "Version number now auto-syncs from main.py", "Added English changelog (changelog-en.json)", "Language-based changelog display (Chinese shows changelog.json, others show changelog-en.json)"]}]}
+{
+    "changelog": [
+        {
+            "version": "v1.0.0",
+            "date": "2026-04-30",
+            "changes": [
+                "Initial release",
+                "Implemented player movement and jumping",
+                "Added map editor functionality",
+                "Support for level import/export",
+                "Added start, end, trap and other items",
+                "Implemented level selection interface"
+            ]
+        },
+        {
+            "version": "v1.0.1",
+            "date": "2026-05-04",
+            "changes": [
+                "Added multi-language support (Simplified Chinese/English)",
+                "Added settings interface with language switching",
+                "Added developer info button",
+                "Added door item with click toggle",
+                "Fixed door state initialization issue",
+                "Fixed editor item overlap placement issue"
+            ]
+        },
+        {
+            "version": "v1.0.2",
+            "date": "2026-05-04",
+            "changes": [
+                "Added changelog feature"
+            ]
+        },
+        {
+            "version": "v1.0.3",
+            "date": "2026-05-04",
+            "changes": [
+                "Fixed text overflow clipping in changelog",
+                "Added scroll range limits",
+                "Version number now auto-syncs from main.py",
+                "Added English changelog (changelog-en.json)",
+                "Language-based changelog display (Chinese shows changelog.json, others show changelog-en.json)"
+            ]
+        },
+        {
+            "version": "v1.0.4",
+            "date": "2026-05-04",
+            "changes": [
+                "Fixed black box display issue in changelog (using SRCALPHA transparent Surface)",
+                "Fixed incomplete content display in changelog",
+                "Optimized scroll clipping logic using set_clip for precise clipping",
+                "Added maximum scroll range limit to prevent over-scrolling"
+            ]
+        },
+        {
+            "version": "v1.0.5",
+            "date": "2026-05-04",
+            "changes": [
+                "Fixed issue where changelog showed old language content after switching languages",
+                "Fixed changelog display issue, ensuring complete content display",
+                "Changelog now reloads corresponding language file when entering the interface",
+                "Added Level 3: Mechanism Chamber (advanced level with door mechanisms)",
+                "Updated version to v1.0.5"
+            ]
+        }
+    ]
+}

@@ -188,6 +188,7 @@ class Menu:
                             return None
                         elif action == "changelog":
                             self.state = "changelog"
+                            self._load_changelog()
                             self.changelog_scroll = 0
                             return None
                         elif action == "quit":
@@ -402,32 +403,36 @@ class Menu:
         pygame.draw.rect(self.screen, (35, 35, 50), content_rect, border_radius=8)
         pygame.draw.rect(self.screen, (80, 80, 100), content_rect, 2, border_radius=8)
         
-        clip_surface = pygame.Surface((content_rect.width - 20, content_rect.height - 20))
-        clip_surface.fill((35, 35, 50))
+        total_height = 30
+        for entry in self.changelog_data:
+            total_height += 35
+            for change in entry.get("changes", []):
+                total_height += 25
+            total_height += 15
+        
+        clip_surface = pygame.Surface((content_rect.width - 20, max(total_height, content_rect.height - 20)), pygame.SRCALPHA)
+        clip_surface.fill((35, 35, 50, 0))
 
-        y_offset = 20
+        y_offset = 15
 
         for entry in self.changelog_data:
-            if y_offset > content_rect.height - 40:
-                break
             version_text = self.button_font.render(f"{entry['version']} ({entry['date']})", True, (100, 149, 237))
-            clip_surface.blit(version_text, (20, y_offset))
+            clip_surface.blit(version_text, (15, y_offset))
             y_offset += 35
 
             for change in entry.get("changes", []):
-                if y_offset > content_rect.height - 30:
-                    break
                 change_text = self.small_font.render(f"• {change}", True, (200, 200, 200))
-                clip_surface.blit(change_text, (40, y_offset))
+                clip_surface.blit(change_text, (35, y_offset))
                 y_offset += 25
 
             y_offset += 15
-
-        scrolled_clip = pygame.Surface((content_rect.width - 20, content_rect.height - 20))
-        scrolled_clip.blit(clip_surface, (0, -self.changelog_scroll))
         
-        self.screen.blit(scrolled_clip, (content_rect.x + 10, content_rect.y + 10),
-                        area=(0, 0, content_rect.width - 20, content_rect.height - 20))
+        self.screen.set_clip(pygame.Rect(content_rect.x + 10, content_rect.y + 10, 
+                                          content_rect.width - 20, content_rect.height - 20))
+        
+        self.screen.blit(clip_surface, (content_rect.x + 10, content_rect.y + 10 - self.changelog_scroll))
+        
+        self.screen.set_clip(None)
 
         mx, my = pygame.mouse.get_pos()
         back_btn = pygame.Rect(self.screen.get_width() // 2 - 100, self.screen.get_height() - 60, 200, 45)
