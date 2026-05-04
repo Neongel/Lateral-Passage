@@ -3,7 +3,7 @@ import sys
 import os
 
 os.environ["SDL_IME_SHOW_UI"] = "1"
-VERSION = "v1.0.2"
+VERSION = "v1.0.3"
 
 from menu import Menu
 from game import Game
